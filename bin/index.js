@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 const { program } = require("commander");
-const figlet = require("figlet");
+const figlet = require("figlet"); //for ASCII art
 const fs = require("fs");
 
 const { getCodeFromFile } = require("../bin/utils/getCodeFromFile");
@@ -12,6 +12,7 @@ program
   .description("Explain the code in the terminal")
   .action(async (file) => {
     try {
+      // check if the give path is file or directory
       const isDirectory = fs.statSync(file).isDirectory();
 
       if (isDirectory) {
@@ -37,8 +38,10 @@ program
         console.log(data);
       });
 
+      const formattedResponse = `${JSON.stringify(explanation, null, 1)}`;
+
       setTimeout(() => {
-        console.log(JSON.stringify(explanation));
+        console.log(formattedResponse);
       }, 3000);
     } catch (error) {
       console.error(`Error: ${error.message}`);

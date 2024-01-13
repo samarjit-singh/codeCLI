@@ -24,7 +24,7 @@ async function getExplanationFromAPI(code) {
         },
       }
     );
-    return response.data;
+    return response.data.choices[0].message.content;
   } catch (error) {
     throw new Error(
       `Failed to get code explanation from API: ${error.message}`
